@@ -1,5 +1,40 @@
 var http = require('http');
-http.createServer(function (req, res) {
-  res.writeHead(200, {'Content-Type': 'text/plain'});
-  res.end('Hello World\nApp (corsproxy) is running..');
+var url = require('url');
+
+http.createServer(function (proxyReq, proxyResp) {
+	var params = url.parse(proxyReq.url, true);
+	var imgURL = "http://" + params.query.src;
+
+	var destParams = url.parse(imgURL);
+	
+	var reqOptions = {
+		host: destParams.host,
+		port: 80,
+		path: destParams.pathname,
+		method: "GET"
+	};
+	
+	var req = http.request(reqOptions, function(res) {
+		  var headers = res.headers;
+		  headers['Access-Control-Allow-Origin'] = '*';
+		  headers['Access-Control-Allow-Headers'] = 'X-Requested-With';
+		  proxyResp.writeHead(200, headers);
+		    
+		  res.on('data', function (chunk) {
+		    proxyResp.write(chunk);		    
+		  });
+		  
+		  res.on('end', function() {
+             proxyResp.end();
+		  });
+	});
+
+	req.on('error', function(e) {
+		console.log('problem with request: ' + e.message);
+		proxyResp.writeHead(503);
+		proxyResp.write("An error happened!");
+		proxyResp.end();
+	});		    
+	req.end();
+
 }).listen(12354);
