@@ -25,7 +25,7 @@ http.createServer(function (proxyReq, proxyResp) {
 		  });
 		  
 		  res.on('end', function() {
-             proxyResp.end();
+            proxyResp.end();
 		  });
 	});
 
