@@ -1,6 +1,7 @@
 var http = require('http');
 var url = require('url');
 
+var port = process.env.PORT || 12345;
 http.createServer(function(proxyReq, proxyResp) {
     var params = url.parse(proxyReq.url, true);
     var imgURL = "http://" + params.query.src;
@@ -37,4 +38,4 @@ http.createServer(function(proxyReq, proxyResp) {
     });
     req.end();
 
-}).listen(12354);
+}).listen(port);
