@@ -4,14 +4,14 @@ var url = require('url');
 var port = process.env.PORT || 12345;
 http.createServer(function(proxyReq, proxyResp) {
     var params = url.parse(proxyReq.url, true);
-    var imgURL = "http://" + params.query.src;
+    var imgURL = params.query.src;
 
     var destParams = url.parse(imgURL);
 
     var reqOptions = {
         host : destParams.host,
         port : 80,
-        path : destParams.pathname,
+        path : destParams.path,
         method : "GET"
     };
 
