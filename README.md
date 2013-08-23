@@ -6,4 +6,4 @@ http://corsproxy.nodester.com/?src=farm7.static.flickr.com/6048/6250681839_7574c
 
 <img src="http://corsproxy.nodester.com/?src=farm7.static.flickr.com/6048/6250681839_7574c8c4b6_m.jpg"></img>
 
-Note: The above link is now defunct, looks like nodester went out of business. But it illustrates the point how you can use this service. 
+Note: The above link is now defunct, looks like nodester went out of business. However, it still illustrates the point how you can use this service. 
